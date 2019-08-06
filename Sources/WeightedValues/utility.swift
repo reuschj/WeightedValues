@@ -5,6 +5,26 @@ import Foundation
  */
 
 /**
+ Rounds the specified number to the specified number of decimal places
+ - Parameter number: The number to round
+ - Parameter places: The number of decimal places to round to
+ - Returns: Returns the rounded number.
+ 
+ # Example
+ ```
+ let rounded = round(23.123456, places: 2)
+ print(rounded) // Prints '23.12'
+ ```
+ 
+ - Author: Justin Reusch
+ - Date: August 6, 2019
+ */
+func round(_ number: Double, places: Double) -> Double {
+    let modifier = pow(10, round(places))
+    return round(number * modifier) / modifier
+}
+
+/**
  Limits the value of the input to the specified range. If the input is under the range, it will be increased to the minimum value. If the input is over the range, it will be truncated to the maximum value.
  - Parameter input: The value need to limit.
  - Parameter range: The closed range the value must fall within.
@@ -112,5 +132,5 @@ func getPoints(possibleValue: Double?) -> Int? {
  - Date: July 31, 2019
  */
 func getPoints(value: Double) -> Int {
-    return Int(value)
+    return Int(round(value))
 }

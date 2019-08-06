@@ -25,9 +25,9 @@ final class WeightedValuesTests: XCTestCase {
         
         XCTAssertEqual(north.points, 100)
         XCTAssertEqual(south.points, 84)
-        XCTAssertEqual(east.points, 83)
-        XCTAssertEqual(west.points, 40)
-        XCTAssertEqual(total.points, 85)
+        XCTAssertEqual(east.points, 84)
+        XCTAssertEqual(west.points, 41)
+        XCTAssertEqual(total.points, 86)
         XCTAssertEqual(Int(total.normalized ?? 0), 85)
     }
 

@@ -60,10 +60,10 @@ public extension Weighted {
     /// For string descriptions
     var description: String {
         guard let value = value else { return "\(label): \(notApplicable)" }
-        let valueString = "\(Int(value))"
+        let valueString = "\(round(value, places: 2))"
         let points = getPoints(value: value)
         let normalized = normalize(value: value, weight: weight)
-        let normalizedString = "\(Int(normalized))"
+        let normalizedString = "\(round(normalized, places: 2))"
         let performance = getPerformance(value: value, normalized: normalized)
         let performanceDescription = getPerformanceDescription(performance: performance)
         return "\(label): \(points) points (Performance: \(performanceDescription), Unweighted: \(valueString), Normalized: \(normalizedString))"
