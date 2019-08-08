@@ -49,7 +49,7 @@ public struct WeightedSet: Weighted, Hashable, Comparable {
     public var isBonus: Bool = false
 
     /// Initializer with a list of weighted values, flags or other sets
-    public init(_ label: String, selfValue: Double? = nil, weight: Double = defaultWeight, isBonus: Bool = false, subValues: [Weighted]) {
+    public init(_ label: String, selfValue: Double? = nil, weight: Double = defaultWeight, isBonus: Bool = false, subValues: [Weighted?]) {
         self.label = label
         self.selfValue = selfValue
         self.weight = limitToRange(keep: weight, within: minWeight...maxWeight)
@@ -59,7 +59,7 @@ public struct WeightedSet: Weighted, Hashable, Comparable {
     }
     
     /// Initializer with a variadic list of weighted values, flags or other sets
-    public init(_ label: String, selfValue: Double? = nil, weight: Double = defaultWeight, isBonus: Bool = false, subValues: Weighted...) {
+    public init(_ label: String, selfValue: Double? = nil, weight: Double = defaultWeight, isBonus: Bool = false, subValues: Weighted?...) {
         self.init(label, selfValue: selfValue, weight: weight, isBonus: isBonus, subValues: subValues)
     }
 
@@ -89,16 +89,17 @@ public struct WeightedSet: Weighted, Hashable, Comparable {
         }
     }
     /// Inserts a single new subvalue
-    public mutating func insert(subValue: Weighted) {
+    public mutating func insert(subValue: Weighted?) {
+        guard let subValue = subValue else { return }
         subValues[subValue.key] = subValue
     }
     /// Insert new subvalues as a list
-    public mutating func insert(subValueList: [Weighted]) {
+    public mutating func insert(subValueList: [Weighted?]) {
         let _ = subValueList.map { value in insert(subValue: value) }
     }
     
     /// Insert new subvalues as a variadic
-    public mutating func insert(subValues newSubValues: Weighted...) {
+    public mutating func insert(subValues newSubValues: Weighted?...) {
         insert(subValueList: newSubValues)
     }
     
